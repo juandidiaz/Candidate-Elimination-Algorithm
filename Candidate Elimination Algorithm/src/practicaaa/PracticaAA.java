@@ -8,7 +8,11 @@ package practicaaa;
 import FicherosCSV.ParserCSV;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
+import javax.print.attribute.HashAttributeSet;
 
 /**
  *
@@ -22,23 +26,28 @@ public class PracticaAA {
         System.out.println("Inserte el nombre del fichero a ejecutar: ");
         Scanner sc = new Scanner(System.in);
         String nombre = sc.nextLine();
+        System.out.println("Indique el nombre de la clase positiva: ");
+        String clasePos=sc.nextLine();
         dataset = ParserCSV.leeCSV(nombre);
         int tamanioDataset = dataset.size();
         int tamanioEjemplo = dataset.get(0).length;
 
         //Algoritmo eliminacion de candidatos
-        ArrayList<ListaHipotesis> h = Algoritmos.eliminacion_candidatos(tamanioDataset, tamanioEjemplo, dataset);
+        ArrayList<ListaHipotesis> h = Algoritmos.eliminacion_candidatos(tamanioDataset, tamanioEjemplo, dataset,clasePos);
         ListaHipotesis G = h.get(0);
         ListaHipotesis S = h.get(1);
 
+        Set<Hipotesis> GSet=new HashSet<Hipotesis>();
+       
+        for(int i=0;i<G.getListaHipotesis().size();i++)
+        {
+            GSet.add(G.getListaHipotesis().get(i));
+        }
         System.out.print("El conjunto G es {");
-        for (int i = 0; i < G.getListaHipotesis().size(); i++) {
-            Hipotesis hG = G.getListaHipotesis().get(i);
-            System.out.print("<");
-            for (int j = 0; j < hG.get_hipotesis().length; j++) {
-                System.out.print(hG.get_hipotesis()[j] + ", ");
-            }
-            System.out.print(">,");
+        Iterator<Hipotesis>it=GSet.iterator();
+        while(it.hasNext())
+        {
+            System.out.print(it.next().toString());
         }
         System.out.println("}");
         System.out.println(" ");

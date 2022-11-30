@@ -6,8 +6,21 @@
 ----PARA EJECUTAR EL PROGRAMA----
 1) Dentro de la carpeta src
 2) Teniendo el puntero en cualquier parte de la zona blanca de debajo del archivo
- "PracticaAA" deje pulsado el boton Shift y click derecho
+ "Candidate_Elimination_Algorithm" deje pulsado el boton Shift y click derecho
 3) Le saldran distintas opciones, pulse "Abrir la ventana de Powershell aqui"
-4)Una vez en la ventana del Powershell, escriba "java -jar PracticaAA.jar" 
+4)Una vez en la ventana del Powershell, escriba "java -jar Candidate_Elimination_Algorithm.jar" 
 5) Se ejecutara el programa, lo unico que debe hacer ahora es escribir el nombre del dataset
-que quiere usar. Puede usar los que vienen como ejemplo, llamados dataset y dataset2
+que quiere usar y posteriormente la clase que quiere que se considere positiva. 
+Como ejemplo de datasets vienen todos los ejercicios subidos en Moodle.
+Se llaman de la siguiente
+forma:
+1-datasetEjercicio1 (clases: positive/negative)
+2-datasetEjercicio2 (clases: economy/sports)
+3-datasetEjercicio3YTransparencias (clases: +/-)
+4-datasetEjercicio4 (clases YES/NO)
+5-datasetEjercicio5 (clases: sick/ok)
+6-datasetEjercicio6 (clases: happy/sad)
+7-datasetEjercicio7 (clases: +/-)
+8-datasetEjercicio8 (clases: 0/1)
+
+

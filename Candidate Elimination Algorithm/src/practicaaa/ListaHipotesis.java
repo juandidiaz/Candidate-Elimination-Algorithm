@@ -11,14 +11,15 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class ListaHipotesis {
+public class ListaHipotesis implements Cloneable{
 
     private ArrayList<Hipotesis> hipotesis;
 
     public ListaHipotesis() {
         hipotesis = new ArrayList<Hipotesis>();
     }
-
+   
+  
     public void addHipotesis(Hipotesis h) {
         hipotesis.add(h);
     }
@@ -26,6 +27,14 @@ public class ListaHipotesis {
     public void removeHipotesis(int j) {
         hipotesis.remove(j);
     }
+    
+       public void removeHipotesis2(Object j) {
+        hipotesis.remove(j);
+    }
+   public void setListaHipotesis(ArrayList<Hipotesis> h)
+   {
+       this.hipotesis=h;
+   }
 
     public ArrayList<Hipotesis> getListaHipotesis() {
         ArrayList<Hipotesis> h = (ArrayList<Hipotesis>) hipotesis.clone();
@@ -41,9 +50,9 @@ public class ListaHipotesis {
 
             } else if (hypotheses[i].equals("VACIO")) {
                 s.set_hipotesis(ejemplo[i], i);
-            } else if (hypotheses[i].equals(ejemplo[i])) {
+            } else if (!(hypotheses[i].equals("TODO")) && !(hypotheses[i].equals("VACIO")) && hypotheses[i].equals(ejemplo[i])) {
 
-            } else if (!(hypotheses[i].equals(ejemplo[i]))) {
+            } else if (!(hypotheses[i].equals("TODO")) && !(hypotheses[i].equals("VACIO")) && !(hypotheses[i].equals(ejemplo[i]))) {
                 s.set_hipotesis("TODO", i);
             }
         }
@@ -98,35 +107,45 @@ public class ListaHipotesis {
             if (gAux[j].equals("TODO")) {
                 String Vc2 = ejemplo[j];
 
-                if (opciones.get(j).length == 1) {
+                if (opciones.get(j).length == 1 && opciones.get(j)[0].equals(Vc2)) {
                     String[] gAux2 = gAux.clone();
                     gAux2[j] = "VACIO";
                     Hipotesis h = new Hipotesis(gAux2);
                     hypotheses.add(h);
-                } else {
+                } else if (opciones.get(j).length > 1) {
                     for (int r = 0; r < opciones.get(j).length; r++) {
-                        if (opciones.get(j)[r].equals(Vc2)) {
-
-                        } else {
-                            String[] gAux2 = gAux.clone();
-                            gAux2[j] = opciones.get(j)[r];
-                            Hipotesis h = new Hipotesis(gAux2);
-                            hypotheses.add(h);
-                        }
+                        String[] gAux2 = gAux.clone();
+                        gAux2[j] = opciones.get(j)[r];
+                        Hipotesis h = new Hipotesis(gAux2);
+                        hypotheses.add(h);
                     }
                 }
+
             } else if (gAux[j].equals("VACIO")) {
 
-            } else if (gAux[j].equals(ejemplo[j])) {
-                gAux[j] = "VACIO";
-                Hipotesis h = new Hipotesis(gAux);
+            } else if (!(gAux[j].equals("TODO")) && !(gAux[j].equals("VACIO"))) {
+                String[] gAux2 = gAux.clone();
+                gAux2[j] = "VACIO";
+                Hipotesis h = new Hipotesis(gAux2);
                 hypotheses.add(h);
-            } else if (!gAux[j].equals(ejemplo[j])) {
-
             }
         }
 
         return hypotheses;
+    }
+    
+    @Override
+    public String toString()
+    {
+        String s="";
+        s=s+"{";
+        for(int i=0;i<this.hipotesis.size();i++)
+        {
+            Hipotesis g=this.hipotesis.get(i);
+            s=s+g.toString();
+        }
+        s=s+"}";
+        return s;
     }
 
 }

@@ -29,7 +29,7 @@ public class ParserCSV {
         try {
             nombre = nombre + ".csv";
             File fichero = new File("FicherosCSV");
-            String ruta = fichero.getAbsolutePath() + "\\..\\src\\FicherosCSV\\" + nombre;
+            String ruta = fichero.getAbsolutePath() +"\\..\\src\\FicherosCSV\\" + nombre;
             br = new BufferedReader(new FileReader(ruta));
             String linea = br.readLine();
 

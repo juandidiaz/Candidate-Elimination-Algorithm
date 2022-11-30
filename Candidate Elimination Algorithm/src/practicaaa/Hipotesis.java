@@ -6,6 +6,7 @@
 package practicaaa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -34,42 +35,95 @@ public class Hipotesis {
         int contador = 0;
 
         for (int i = 0; i < ejemplo.length - 1; i++) {
-            if (hipotesis[i].equals("VACIO")) {
-                contador--;
-            } else if (hipotesis[i].equals("TODO")) {
-                contador++;
-            } else if (hipotesis[i].equals(ejemplo[i])) {
-                contador++;
+            if(this.hipotesis[i].equals("TODO") || (this.hipotesis[i].equals(ejemplo[i])))
+            {
+                
             }
-        }
-        return (contador == (ejemplo.length - 1));
-    }
-
-    public boolean esMasGeneral(Hipotesis h) {
-        String[] aux = this.get_hipotesis();
-        String[] auxH = h.get_hipotesis();
-
-        for (int i = 0; i < aux.length; i++) {
-            if (aux[i].equals(auxH[i])) {
-
-            } else if (aux[i].equals("TODO") && !(auxH[i].equals("TODO"))) {
-
-            } else if (aux[i].equals("TODO") && auxH[i].equals("TODO")) {
-
-            } else if (!(aux[i].equals("TODO")) && auxH.equals("TODO")) {
-                return false;
-            } else if (aux[i].equals("VACIO") && auxH[i].equals("VACIO")) {
-
-            } else if (aux[i].equals("VACIO") && !(auxH[i].equals("VACIO"))) {
-                return false;
-            } else if (!(aux[i].equals("TODO")) && !(aux[i].equals("VACIO")) && !(auxH[i].equals("TODO")) && !(auxH[i].equals("VACIO")) && !(aux[i].equals(auxH[i]))) {
-                return false;
-            } else if (!(aux[i].equals("TODO")) && !(aux[i].equals("VACIO")) && auxH[i].equals("TODO")) {
+            else{
                 return false;
             }
-
         }
         return true;
     }
 
+    public boolean esMasGeneral(Hipotesis h) {
+        String[] aux = this.get_hipotesis().clone();
+        String[] auxH = h.get_hipotesis().clone();
+        int contador = 0;
+        for (int i = 0; i < aux.length; i++) {
+
+            if (aux[i].equals("TODO") || aux[i].equals(auxH[i])) {
+
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean esMasEspecifica(Hipotesis h) {
+        String[] aux = this.get_hipotesis();
+        String[] auxH = h.get_hipotesis();
+        int contador = 0;
+        for (int i = 0; i < aux.length; i++) {
+            if (aux[i].equals("VACIO") || aux[i].equals(auxH[i]) || auxH[i].equals("TODO")) {
+
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean hipotesisIgual(Hipotesis h)
+    {
+        String[] aux=this.hipotesis.clone();
+        String[] auxH=h.get_hipotesis().clone();
+        int contador=0;
+        
+        for(int i=0;i<aux.length;i++)
+        {
+            if(aux[i].equals(auxH[i]))
+                contador++;
+        }
+        
+        return (contador==aux.length);
+    }
+    
+    @Override
+    public String toString(){
+        String s="<";
+        for(int i=0;i<this.hipotesis.length;i++)
+        {
+            s=s+this.hipotesis[i]+", ";
+        }
+        s=s+">  ";
+        return s;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override 
+    public int hashCode()
+    {
+        return 1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hipotesis other = (Hipotesis) obj;
+        return Arrays.deepEquals(this.hipotesis, other.hipotesis);
+    }
 }
